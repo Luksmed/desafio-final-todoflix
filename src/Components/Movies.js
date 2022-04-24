@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import ReactStars from "react-rating-stars-component";
+import ReactStars from "react-rating-stars-component"
 import shrek from "../images/shrek.png"
 import spider from "../images/spider.png"
 import sonho from "../images/sonho.png"
@@ -9,12 +9,12 @@ import hoje from "../images/hoje.png"
 import fuga from "../images/fuga.jpg"
 import amarelo from "../images/amarelo.jpg"
 import rocket from "../images/rocket.jpg"
-import { getQueriesForElement } from "@testing-library/react";
+
 
 const Box1 = styled.div`
     position: relative ;       
     margin-left: 3.9vw;   
-    z-index: -1;
+    z-index: ;
 `
 
 const Box2 = styled.div`    
@@ -34,21 +34,21 @@ const Box3 = styled.div`
 
 const Title = styled.h1`
     font-size: 2.1vw;
-    color: white;        
+    color: white;    
+      
 `
 
 const Image = styled.img`
    cursor: pointer;
    width: 18vw;
-   height: 23vh;
-   
+   height: 23vh;   
    &:hover {
     transform: scale(1.02)
    }
 `
 
 const info = {
-  count: "5"
+  
 }
 
 const Titulo = styled.h2`
@@ -58,6 +58,11 @@ const Titulo = styled.h2`
 const Par = styled.p`
     font-size: 0.9vw;
     padding-top: 0.4vw; 
+`
+
+const Box4 = styled.div`
+  display: flex;
+  justify-content: space-between;
 `
 
 export default class Movies extends React.Component {
@@ -104,25 +109,63 @@ export default class Movies extends React.Component {
               title: "Rocketman",
               info: "Em reabilitação, Elton John relembra suas origens humildes, as músicas atemporais e os momentos de inspiração e excesso. Baseado em sua verdadeira história."  
             }                    
-        ]
+        ],        
+        filtroFilmes: []
     }
-    
+
+    componentDidMount() {
+      this.getFilmes();
+    }
+  
+    getFilmes = async () => {     
+  
+      const movies = this.state.filmes.map((item) => {
+        return {
+          ...item         
+        };
+      });
+  
+      this.setState({
+        filmes: movies,
+        filtroFilmes: movies
+      });
+    };
+  
+    filtroMov = (e) => {
+      const { filmes } = this.state;
+  
+      const funcaoFilter = filmes.filter((item) => {
+        if (item.title.toLowerCase().includes(e.target.value.toLowerCase())) {
+          return true;
+        }
+      });
+  
+      this.setState({
+        filtroFilmes: funcaoFilter
+      });
+    };
+        
     render() {
-       return (
+       return (         
         <Box1>
-          <Title>Todos</Title>
+          <input type="text"
+            placeholder="Pesquisar filme" onChange={this.filtroMov} />
+            <Title>Todos</Title>
             <Box2>           
-              {this.state.filmes.map((item) => (
+              {this.state.filtroFilmes.map((item) => (
                <Box3>
                  <ul>
                    {item.image}
-                   <Titulo>{item.title}<ReactStars {...info} /></Titulo>
+                   <Box4>
+                     <Titulo>{item.title}</Titulo>
+                     <ReactStars />
+                   </Box4>
                    <Par>{item.info}</Par>
                  </ul>         
                </Box3>                     
               ))}           
             </Box2>
-        </Box1>
+        </Box1>       
        )
     } 
 }

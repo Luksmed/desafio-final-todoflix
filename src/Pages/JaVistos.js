@@ -11,6 +11,7 @@ export default class JaVistos extends React.Component {
         return (
             <div>
                <Title>JÁ VISTOS</Title>
+             
             </div>
          )
        }

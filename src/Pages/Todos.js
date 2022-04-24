@@ -6,7 +6,6 @@ const Box1 = styled.div`
     
 `
 
-
 export default class Todos extends React.Component {
 
     render() {

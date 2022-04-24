@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Link, Routes, Route } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import styled from "styled-components";
-import Categorias from "./Components/Categorias"
 import Inicio from "./Pages/Inicio"
 import Todos from "./Pages/Todos"
 import Favoritos from "./Pages/Favoritos"
@@ -11,6 +10,7 @@ import Adicionados from "./Pages/Adicionados"
 import todoflix from "./images/todoflix2.png"
 import user from "./images/user.png"
 import arrowdown from "./images/arrowdown.png"
+import AddFilme from "./Components/AddFilme";
 
 const GlobalStyle = createGlobalStyle`
 *{
@@ -36,18 +36,17 @@ const Todo = styled.img`
   width: 7.5%;
   height: 6.4vh;
 `
+
 const List = styled.ul`
   display: flex;  
   list-style: none;
-  margin-top: 3.5vh;  
-  
+  margin-top: 3.5vh;    
 `;
 
 const ListItem = styled.li`
   font-size: 1.2vw;
   margin-left: 2vw;
   cursor: pointer;
-
 `;
 
 const Categ = styled.button`
@@ -74,10 +73,8 @@ const Add = styled.button`
   color: white;
   cursor: pointer;
   border: none;
-  border-radius: 0.2vw;
- 
+  border-radius: 0.2vw; 
 `
-
 
 const Search = styled.input`
   width: 29.2%;
@@ -87,23 +84,20 @@ const Search = styled.input`
   background-color: #2C2C2C;
   color: white;
   border: none;
-  border-radius: 0.2vw;
-  
+  border-radius: 0.2vw;  
 `
 const User = styled.img`
   width: 2.3%;
   height: 5.1vh;
   margin-top: 2.7vh;
   margin-left: 2%;
-  cursor: pointer;
-  
+  cursor: pointer;  
 `
 
 const Arrow = styled.img`
   width: 1.7%;
   height: 3.8vh;
-  margin-top: 3.3vh;
-  
+  margin-top: 3.3vh;  
 `
 
 const Menu = styled.ul`
@@ -119,14 +113,20 @@ const MenuItem = styled.p`
   
 `
 
+
 export default class App extends React.Component {
 
   state = {
-    stateList: false
-  };
+    stateList: false,
+    stateList2: false
+  }
 
   handleList = () => {
     this.setState({ stateList: !this.state.stateList });
+  }
+
+  handleList2 = () => {
+    this.setState({ stateList2: !this.state.stateList2 });
   }
 
   render() {
@@ -152,18 +152,22 @@ export default class App extends React.Component {
               )}           
               </ListItem>
             </List>
-            </nav>
-          <Add>Adicionar filme</Add> 
+          </nav>
+          <Add onClick={this.handleList2}>Adicionar filme</Add>        
+          {this.state.stateList2 && <AddFilme />}
+          
+          
+          
           <Search type="text" placeholder="  🔍  Pesquisar" /> 
           <User src={user} />
           <Arrow src={arrowdown} />
         </Box1>
         <Routes>
-            <Route path="/" element={<Inicio/>} />  
-            <Route path="/todos" element={<Todos/>} />
-            <Route path="/favoritos" element={<Favoritos/>} />
-            <Route path="/javistos" element={<JaVistos/>} />
-            <Route path="/adicionados" element={<Adicionados/>} />
+          <Route path="/" element={<Inicio/>} />  
+          <Route path="/todos" element={<Todos/>} />
+          <Route path="/favoritos" element={<Favoritos/>} />
+          <Route path="/javistos" element={<JaVistos/>} />
+          <Route path="/adicionados" element={<Adicionados/>} />
         </Routes>  
       </Router>
     )
