@@ -13,7 +13,7 @@ const Box1 = styled.div`
     margin-top: 10.4vh;
     background-color: black;
     z-index: 10;
-`;
+`
 
 const ButClose = styled.button`
   height: 3.8vh;
@@ -61,10 +61,8 @@ const Tag = styled.label`
   font-weight: bold;
 `
 
-
 const Tag2 = styled.label`
-  font-size: 1.1vw;
-  
+  font-size: 1.1vw;  
   `
 
 const Field = styled.input`
@@ -172,10 +170,19 @@ font-weight: bold;
 `
 
 export default class AddFilme extends React.Component {
+
+  state = {
+    
+  };
+
+  handle = () => {
+    this.setState({ taAberto: !this.state.taAberto });
+  };
+
   render() {
     return (
       <Box1>
-        <ButClose>X</ButClose>
+        <ButClose onClick={this.handle}>X</ButClose>
         <Title>Adicionar Filme</Title>
         <Box2>
           <Box3>
@@ -190,7 +197,7 @@ export default class AddFilme extends React.Component {
           <Tag2 for="css">Ainda não assisti</Tag2>
           <Par2>Nota</Par2>
           <ReactStars 
-          size={37}
+            size={37}
           />
           </Box3>
           <Box4>

@@ -10,11 +10,9 @@ import fuga from "../images/fuga.jpg"
 import amarelo from "../images/amarelo.jpg"
 import rocket from "../images/rocket.jpg"
 
-
 const Box1 = styled.div`
     position: relative ;       
-    margin-left: 3.9vw;   
-    z-index: ;
+    margin-left: 3.9vw;       
 `
 
 const Box2 = styled.div`    
@@ -34,8 +32,7 @@ const Box3 = styled.div`
 
 const Title = styled.h1`
     font-size: 2.1vw;
-    color: white;    
-      
+    color: white;          
 `
 
 const Image = styled.img`
@@ -46,10 +43,6 @@ const Image = styled.img`
     transform: scale(1.02)
    }
 `
-
-const info = {
-  
-}
 
 const Titulo = styled.h2`
     font-size: 1.1vw;
@@ -65,6 +58,27 @@ const Box4 = styled.div`
   justify-content: space-between;
 `
 
+const SubBox = styled.div`
+  height: 4vh;
+  width: 1.8vw;  
+  margin-left: 15.5vw;
+  margin-top: -24.5vh;
+  position: absolute;
+  cursor: pointer;
+`
+
+const Search = styled.input`
+  width: 30.2%;
+  height: 5.1vh; 
+  background-color: #2C2C2C;
+  color: white;
+  border: none;
+  border-radius: 0.2vw;  
+  margin-left: 59.3%;
+  margin-top: -17.2vh;
+  position: absolute;  
+`
+
 export default class Movies extends React.Component {
 
     state = {
@@ -72,7 +86,8 @@ export default class Movies extends React.Component {
             {
               image: <Image src={shrek} />,
               title: "Shrek",
-              info: "Para resgatar uma princesa das garras de um dragão que cospe fogo, o ogro Shrek se une a um companheiro improvável: um burro brincalhão."
+              info: "Para resgatar uma princesa das garras de um dragão que cospe fogo, o ogro Shrek se une a um companheiro improvável: um burro brincalhão.",
+              
             },
             {
               image: <Image src={spider} />,
@@ -148,88 +163,34 @@ export default class Movies extends React.Component {
     render() {
        return (         
         <Box1>
-          <input type="text"
-            placeholder="Pesquisar filme" onChange={this.filtroMov} />
-            <Title>Todos</Title>
-            <Box2>           
-              {this.state.filtroFilmes.map((item) => (
-               <Box3>
-                 <ul>
-                   {item.image}
-                   <Box4>
-                     <Titulo>{item.title}</Titulo>
-                     <ReactStars />
-                   </Box4>
-                   <Par>{item.info}</Par>
-                 </ul>         
-               </Box3>                     
-              ))}           
-            </Box2>
+          <Search type="text" placeholder="  🔍  Pesquisar" onChange={this.filtroMov} />
+          <Title>Todos</Title>
+          <Box2>           
+            {this.state.filtroFilmes.map((item) => (
+              <Box3>
+                <ul>
+                  {item.image}
+                  <SubBox> 
+                    <ReactStars
+                    count={1}
+                    char="♡"
+                    size={36}
+                    color="grey"
+                    activeColor="red"
+                    />
+                  </SubBox>
+                  <Box4>
+                    <Titulo>{item.title}</Titulo>
+                    <ReactStars />
+                  </Box4>
+                  <Par>{item.info}</Par>
+                </ul>         
+              </Box3>                     
+            ))}           
+          </Box2>
         </Box1>       
        )
     } 
 }
 
-/*
 
-import React from "react"
-import styled from "styled-components"
-
-
-const Container = styled.div`
-    width: 60vw;
-    height: 40vh;
-    background-color: bisque;
-    border: 2px solid red;
-    margin: 5px;
-    text-align: center;
-`
-
-const Card = ({nome, idade, gosto, children}) => {
-    return (
-        <Container>
-            <p>Oi, me chamo {nome}, tenho {idade} anos e gosto de {gosto}</p>
-            {children}
-        </Container>
-    )
-}
-
-export default Card
-
---------------------------------------------------------------------------------------
-
-import React from 'react'
-import Card from "./Components/Cards"
-
-const Props = () => {
-  return (
-    <div>
-      <Card nome="Natalia" idade="33" gosto="chocolate" />
-      <Card nome="Mari" idade="24" gosto="uva">
-      <button>Clique aqui</button>
-      </Card>
-    </div>
-  )
-}
-
-export default Props
-
-
-{
-              image: <Image src={} />,
-              title: "",
-              info: ""  
-            },
-            {
-                image: <Image src={} />,
-                title: "",
-                info: ""  
-            },
-            {
-                image: <Image src={} />,
-                title: "",
-                info: ""  
-            }
-
-
-*/

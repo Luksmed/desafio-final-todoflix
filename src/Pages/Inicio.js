@@ -1,15 +1,12 @@
 import React, { Component } from "react"
 import styled from "styled-components";
 import family from "../images/family.png"
-import heart from "../images/heart.png"
-import thumbs from "../images/thumbs.png"
 import ReactStars from "react-rating-stars-component"
 import Destaques from "../Components/Destaques"
 
 const info = {
   value: 4,
-  size: 24,
-    
+  size: 24,    
 }
 
 const Box1 = styled.div`
@@ -56,43 +53,62 @@ const Par = styled.p`
 padding-top: 0.9vh;
 `
 
-
-
 const Box3 = styled.div`
-    height: 55vh;
-    display: ;  
+    height: 55vh;    
 `
 
 const Dest = styled.h3`
     margin-top: 5vh;
     color: white;
     margin-left: 3.9%;   
-    font-size: 1.3vw; 
-    
+    font-size: 1.3vw;     
+`
+
+const Search = styled.input`
+  width: 29.1%;
+  height: 5.1vh; 
+  background-color: #2C2C2C;
+  color: white;
+  border: none;
+  border-radius: 0.2vw;  
+  margin-left: 60.9%;
+  margin-top: -17.2vh;
+  position: absolute;
 `
 
 class Inicio extends Component {
+  
     render() {
       return (
           <section>
             <Box1>
+              <Search type="text" placeholder="  🔍  Pesquisar" />
               <Fam src={family} />
-              <Box2>
-                <Pic src={heart} />
-                <Prepar>Visto recentemente</Prepar>
-                <Title>Capitao Fantástico</Title>
-                <Sub>Nas florestas do estado de Washington, um pai cria seus seis filhos longe da civilização, em uma rígida rotina de aventuras. Ele é forçado a deixar o isolamento e leva sua família para encarar o mundo, desafiando sua ideia do que significa ser pai.</Sub>
-                <Par><ReactStars {...info}/></Par>
-              </Box2>            
+                <Box2>
+                  <ReactStars
+                    count={1}
+                    char="♡"
+                    size={25}
+                    color="grey"
+                    activeColor="red"
+                  />
+                  <Prepar>Visto recentemente</Prepar>
+                  <Title>Capitao Fantástico</Title>
+                  <Sub>Nas florestas do estado de Washington, um pai cria seus seis filhos longe da civilização, em uma rígida rotina de aventuras. Ele é forçado a deixar o isolamento e leva sua família para encarar o mundo, desafiando sua ideia do que significa ser pai.</Sub>
+                  <Par>
+                    <ReactStars 
+                    {...info}/>
+                    </Par>
+                </Box2>            
             </Box1>
             <Box3>
               <Dest>Destaques</Dest>
               <Destaques />
             </Box3>
-        </section>
-          
-      )
-   }
+          </section>         
+       )
+    }
 }
 
 export default Inicio
+

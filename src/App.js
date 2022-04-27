@@ -41,13 +41,13 @@ const List = styled.ul`
   display: flex;  
   list-style: none;
   margin-top: 3.5vh;    
-`;
+`
 
 const ListItem = styled.li`
   font-size: 1.2vw;
   margin-left: 2vw;
   cursor: pointer;
-`;
+`
 
 const Categ = styled.button`
   font-size: 1.134vw;
@@ -81,10 +81,9 @@ const Search = styled.input`
   height: 5.1vh;
   margin-top: 2.7vh;
   margin-left: 1%;
-  background-color: #2C2C2C;
-  color: white;
-  border: none;
-  border-radius: 0.2vw;  
+  background-color: transparent; 
+  border: none;  
+  border-radius: 0.2vw;     
 `
 const User = styled.img`
   width: 2.3%;
@@ -107,18 +106,19 @@ const Menu = styled.ul`
   padding: 1vw;  
   position: absolute;  
   line-height: 2;
+  z-index: 999
 `
 
 const MenuItem = styled.p`
   
 `
 
-
 export default class App extends React.Component {
 
   state = {
     stateList: false,
-    stateList2: false
+    stateList2: false,
+    stateList3: true   
   }
 
   handleList = () => {
@@ -128,6 +128,8 @@ export default class App extends React.Component {
   handleList2 = () => {
     this.setState({ stateList2: !this.state.stateList2 });
   }
+
+ 
 
   render() {
     return (
@@ -154,11 +156,8 @@ export default class App extends React.Component {
             </List>
           </nav>
           <Add onClick={this.handleList2}>Adicionar filme</Add>        
-          {this.state.stateList2 && <AddFilme />}
-          
-          
-          
-          <Search type="text" placeholder="  🔍  Pesquisar" /> 
+          {this.state.stateList2 && <AddFilme />}   
+          <Search  type="text"  />
           <User src={user} />
           <Arrow src={arrowdown} />
         </Box1>
@@ -174,64 +173,4 @@ export default class App extends React.Component {
   }
 }
 
-/*
 
-import React from 'react'
-import Modal from 'react-modal'
-
-export default class App extends React.Component {
-
-  state ={
-    taAberto : false
-  }
-
-  openModal = () => {
-    this.setState({taAberto:true})
-  }
-
-  closeModal = () = {
-  this.setState({stateModal: false})
-  }
-
-  render(){
-    return(
-      <div>
-      <button onClick={this.openModal}>Open Modal</button>
-      
-      style={{
-    overlay: {      
-      backgroundColor: 'aquamarine'
-    },
-    content: {     
-      backgroundcolor: 'yellow',      
-    }
-  }}  
-          
-      isOpen={this.state.taAberto}>
-        <button>Close Modal</button>
-        <h3>Hi Folks<h3>
-      </Modal>
-      <div>
-    )
-  }
-}
-
-
-estilo por classe
-
-Modal ClassName=
-e/ou
-Modal overlayClassName
-
-
-
-
-
-
-<details>
-                  <summary>Categorias</summary>
-
-                   </details>
-
-
-*/

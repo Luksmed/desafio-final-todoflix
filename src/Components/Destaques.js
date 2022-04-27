@@ -9,26 +9,26 @@ import hoje from "../images/hoje.png"
 import fuga from "../images/fuga.jpg"
 import amarelo from "../images/amarelo.jpg"
 import rocket from "../images/rocket.jpg"
-import heart from "../images/heart.png"
 import Carousel from "nuka-carousel";
+import Modal from "react-modal"
+
 
 const Box1 = styled.div`
     margin-top: 2.4vh;       
-    margin-left: 1.7vw;     
+    margin-left: 1.7vw;         
 `
 
 const Image = styled.img`
    
    width: 18vw;
-   height: 23vh;      
-   
+   height: 23vh;        
 `
 
 const Box2 = styled.div`
     width: 18vw;
     height: 38.7vh;  
     margin-bottom: 1.4vw;
-    margin-right: 15px;    
+    margin-right: 15px;        
 `
 
 const Box3 = styled.div`
@@ -47,10 +47,17 @@ const Par = styled.p`
     color: white;
 `
 
-const Pic = styled.img`
+const SubBox = styled.div`
+  height: 4vh;
+  width: 1.8vw;  
+  margin-left: 15.5vw;
+  margin-top: -24.5vh;
   position: absolute;
-  margin-left: 17.8vw;
-  margin-top: 0.5vh;
+  cursor: pointer;
+  z-index: 999;
+`
+
+const ImgBox = styled.div`
   cursor: pointer;
 `
 
@@ -98,38 +105,81 @@ export default class Movies extends React.Component {
               title: "Rocketman",
               info: "Em reabilitação, Elton John relembra suas origens humildes, as músicas atemporais e os momentos de inspiração e excesso. Baseado em sua verdadeira história."  
             }                    
-        ]
+        ],
+        stateModal: false
     }
 
+    openModal = () => {
+      this.setState({ stateModal: true });
+    };
+  
+    closeModal = () => {
+      this.setState({ stateModal: false });
+    };
+
     render() {
-        return (
-            <Carousel
-            slidesToShow={5}
-            autoplay="true"            
-            autoplayInterval={2500}
-            adaptiveHeight={true}
-            wrapAround={true}
-            defaultControlsConfig={{
-                nextButtonText: ">",
-                prevButtonText: "<"               
-              }}
-            >            
-            {this.state.filmes.map((item) => (
-              <Box1>   
-                <Box2>                 
-                  <ul>                 
-                    {item.image}
-                    <Pic src={heart} />
-                    <Box3>                   
-                      <Titulo>{item.title}</Titulo>
-                      <ReactStars />
-                    </Box3>
+      return (
+        <Carousel
+          slidesToShow={5}
+          autoplay="true"           
+          autoplayInterval={2500}
+          adaptiveHeight={true}
+          wrapAround={true}
+          defaultControlsConfig={{
+            nextButtonText: ">",
+            prevButtonText: "<"               
+          }}
+        >            
+          {this.state.filmes.map((item) => (
+            <Box1>   
+              <Box2> 
+                <ul>   
+                 <ImgBox onClick={this.openModal}>                    
+                   {item.image}
+                 </ImgBox>
+                  <Modal
+                    style={{
+                      overlay: 
+                      {
+                        position: 'fixed',
+                        top: 50,
+                        left: 400,
+                        right: 400,
+                        bottom: 50,
+                        backgroundColor: 'black'
+                      },
+                      content: 
+                      {
+                        backgroundColor: "black"
+                      }
+                    }}
+                    isOpen={this.state.stateModal}
+                    >
+                    <button onClick={this.closeModal}>CLOSE MODAL</button>    
+                    <div> 
+                      {item.image.id}
+                    </div>
+                  </Modal> 
+                  <SubBox> 
+                    <ReactStars
+                     count={1}
+                     char="♡"
+                     size={36}
+                     color="grey"
+                     activeColor="red"
+                    />
+                  </SubBox>
+                  <Box3>                   
+                    <Titulo> {item.title}</Titulo>                     
+                    <ReactStars />
+                  </Box3>
                     <Par>{item.info}</Par>                   
-                  </ul>                         
-                </Box2>     
-              </Box1>       
-              ))}                
-            </Carousel>
-        )
-    }
+                </ul>                         
+              </Box2>     
+            </Box1>       
+          ))}                
+        </Carousel>
+      )
+   }
 }
+
